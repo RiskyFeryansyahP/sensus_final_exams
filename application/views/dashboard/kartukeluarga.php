@@ -67,8 +67,8 @@
                             Administration
                         </p>
                         <ul class="menu-list">
-                            <li><a class="is-active has-background-info">Data Penduduk</a></li>
-                            <li><a>Data Kartu Keluarga</a></li>
+                            <li><a>Data Penduduk</a></li>
+                            <li><a class="is-active has-background-info">Data Kartu Keluarga</a></li>
                             <li><a>Data Pendatang</a></li>
                             <li><a>Data Kematian</a></li>
                         </ul>
@@ -85,51 +85,44 @@
                 </div>
                 <div class="columns is-variable is-dekstop">
                     <div class="column">
-                        <table class="table is-narrow is-hoverable">
+                        <table class="table is-fullwidth is-narrow is-hoverable">
                             <thead>
                                 <tr>
-                                    <th>NIK</th>
-                                    <th>Nama</th>
-                                    <th>Tempat, Tanggal Lahir</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>RT/RW</th>
-                                    <th>Pekerjaan</th>
-                                    <th>Kewarganegaraan</th>
-                                    <th>Pendidikan Terakhir</th>
-                                    <th>Agama</th>
-                                    <th>Golongan Darah</th> 
+                                    <th>#</th>
+                                    <th>No KK</th>
+                                    <th>Status Dalam Keluarga</th>
+                                    <th>Nama Ayah</th>
+                                    <th>Nama Ibu</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                    foreach ($penduduks as $penduduk) {
+                                    $i = 1;
+                                    foreach ($kks as $kk) {
                                 ?>
                                     <tr>
-                                        <td> <?= $penduduk['nik']; ?> </td>
-                                        <td> <?= $penduduk['nama']; ?> </td>
-                                        <td> <?= $penduduk['tempat'] . ", " . $penduduk['tgl_lahir']; ?> </td>
-                                        <td> <?= $penduduk['JK']; ?> </td>
-                                        <td> <?= $penduduk['RT/RW']; ?> </td>
-                                        <td> <?= $penduduk['pekerjaan']; ?> </td>
-                                        <td> <?= $penduduk['kewarganegaraan']; ?> </td>
-                                        <td> <?= $penduduk['pendidikan_terakhir']; ?> </td>
-                                        <td> <?= $penduduk['agama']; ?> </td>
-                                        <td> <?= $penduduk['gol_darah']; ?> </td>
+                                        <td> <?= $i ?> </td>
+                                        <td> <?= $kk['no_kk']; ?> </td>
+                                        <td> <?= $kk['status_dalam_keluarga']; ?> </td>
+                                        <td> <?= $kk['ayah']; ?> </td>
+                                        <td> <?= $kk['ibu']; ?> </td>
                                         <td>
-                                            <a href="http://localhost:8888/sensus/index.php/penduduk/editpenduduk/<?= $penduduk['nik'] ?>" class="button is-warning">
+                                            <button class="button is-warning modal-button" data-target="#modalEdit"
+                                                data-kk="<?= $kk['id'] . '-' . $kk['no_kk'] . '-' . $kk['status_dalam_keluarga'] . '-' . $kk['ayah'] . '-' . $kk['ibu'] ?>">
                                                 <span class="icon is-small">
                                                     <i class="fas fa-edit"></i>
                                                 </span>
-                                            </a>
-                                            <button class="button is-danger">
+                                            </button>
+                                            <a onClick="return confirm('Anda yakin ingin menghapus ini ?')" href="http://localhost:8888/sensus/index.php/kartukeluarga/dodeletekartukeluarga/<?= $kk['id'] ?>" class="button is-danger">
                                                 <span class="icon is-small">
                                                     <i class="fas fa-trash"></i>
                                                 </span>
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 <?php
+                                    $i++;
                                     }
                                 ?>
                             </tbody>
@@ -151,85 +144,111 @@
                 <button class="delete button-close" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
-                <form action="http://localhost:8888/sensus/index.php/penduduk/doaddpenduduk" method="POST">
+                <form action="http://localhost:8888/sensus/index.php/kartukeluarga/doaddkartukeluarga" method="POST">
+                    <div class="field">
+                        <label for="#nokk" class="label">No KK</label>
+                        <div class="control">
+                            <input type="text" class="input" id="nokk" name="nokk" placeholder="e.g 1111111111">
+                        </div>
+                    </div>
                     <div class="field">
                         <label for="#nik" class="label">NIK</label>
                         <div class="control">
-                            <input type="number" class="input" id="nik" name="nik" placeholder="e.g 181111001">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label for="#nama" class="label">Nama</label>
-                        <div class="control">
-                            <input type="text" class="input" id="nama" name="nama" placeholder="e.g John Doe">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label for="#tempat" class="label">Tempat</label>
-                        <div class="control">
-                            <input type="text" class="input" id="tempat" name="tempat" placeholder="e.g Malang">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label for="#tgl" class="label">Tanggal Lahir</label>
-                        <div class="control">
-                            <input type="date" class="input" data-date-format="YYYY-MM-DD" data-display-mode="inline" id="tgl" name="tgl">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label for="#jk" class="label">Jenis Kelamin</label>
-                        <div class="control">
                             <div class="select">
-                                <select name="jk" id="jk">
-                                    <option disabled="true" selected="true"> Pilih Jenis Kelamin </option>
-                                    <option value="Laki - Laki"> Laki - Laki </option>
-                                    <option value="Perempuan"> Perempuan </option>
+                                <select name="nik" id="nik">
+                                   <?php
+                                        foreach ($penduduks as $penduduk) {
+                                    ?>
+                                        <option value="<?= $penduduk['nik'] ?>"> <?= $penduduk['nik'] . ' - ' . $penduduk['nama'] ?> </option>
+                                    <?php
+                                        }
+                                   ?>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="field">
-                        <label for="#rtrw" class="label">RT/RW</label>
+                        <label for="#status" class="label">Status Dalam Keluarga</label>
                         <div class="control">
-                            <input type="text" class="input" id="rtrw" name="rtrw" placeholder="e.g 01/01">
+                            <input type="text" class="input" id="status" name="status" placeholder="e.g Anak">
                         </div>
                     </div>
                     <div class="field">
-                        <label for="#pekerjaan" class="label">Pekerjaan</label>
+                        <label for="#ayah" class="label">Nama Ayah</label>
                         <div class="control">
-                            <input type="text" class="input" id="pekerjaan" name="pekerjaan" placeholder="e.g Wirausaha">
+                            <input type="text" class="input" id="ayah" name="ayah" placeholder="e.g Stevenaldo">
                         </div>
                     </div>
                     <div class="field">
-                        <label for="#kewarganegaraan" class="label">Kewarganegaraan</label>
+                        <label for="#Ibu" class="label">Ibu</label>
                         <div class="control">
-                            <input type="text" class="input" id="kewarganegaraan" name="kewarganegaraan" placeholder="e.g Indonesia">
+                            <input type="text" class="input" id="Ibu" name="ibu" placeholder="e.g Suliando">
+                        </div>
+                    </div>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success">Simpan</button>
+                <button class="button button-cancel">Cancel</button>
+            </footer>
+            </form>
+        </div>
+    </div>
+    <!-- end modal -->
+
+    <!-- modal edit -->
+    <div class="modal" id="modalEdit">
+    <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Modal title</p>
+                <button class="delete button-close" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <form action="http://localhost:8888/sensus/index.php/kartukeluarga/doEditKartuKeluarga" method="POST">
+                    <div class="field">
+                        <label for="" class="label">id</label>
+                        <div class="control">
+                            <input type="text" class="input" id="input" name="id" placeholder="e.g 1111111111" readonly>
                         </div>
                     </div>
                     <div class="field">
-                        <label for="#pendidikanterakhir" class="label">Pendidikan Terakhir</label>
+                        <label for="" class="label">No KK</label>
                         <div class="control">
-                            <input type="text" class="input" id="pendidikanterakhir" name="pendidikanterakhir" placeholder="e.g Sarjana Teknik Informatika">
+                            <input type="text" class="input" id="input" name="nokk" placeholder="e.g 1111111111">
                         </div>
                     </div>
                     <div class="field">
-                        <label for="#agama" class="label">Agama</label>
-                        <div class="control">
-                            <input type="text" class="input" id="agama" name="agama" placeholder="e.g Islam">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label for="#golongandarah" class="label">Golongan Darah</label>
+                        <label for="#nik" class="label">NIK</label>
                         <div class="control">
                             <div class="select">
-                                <select name="golongandarah" id="golongandarah">
-                                    <option value="" disabled="true" selected="true"> Pilih Golongan Darah </option>
-                                    <option value="A"> A </option>
-                                    <option value="B"> B </option>
-                                    <option value="B"> AB </option>
-                                    <option value="B"> O </option>
+                                <select name="nik" id="nik">
+                                   <?php
+                                        foreach ($penduduks as $penduduk) {
+                                    ?>
+                                        <option value="<?= $penduduk['nik'] ?>"> <?= $penduduk['nik'] . ' - ' . $penduduk['nama'] ?> </option>
+                                    <?php
+                                        }
+                                   ?>
                                 </select>
                             </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="" class="label">Status Dalam Keluarga</label>
+                        <div class="control">
+                            <input type="text" class="input" id="input" name="status" placeholder="e.g Anak">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="" class="label">Nama Ayah</label>
+                        <div class="control">
+                            <input type="text" class="input" id="input" name="ayah" placeholder="e.g Stevenaldo">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="" class="label">Ibu</label>
+                        <div class="control">
+                            <input type="text" class="input" id="input" name="ibu" placeholder="e.g Suliando">
                         </div>
                     </div>
             </section>
@@ -269,6 +288,18 @@
         document.querySelectorAll('.modal-button').forEach((element) => {
             element.addEventListener('click', () => {
                 const target = document.querySelector(element.getAttribute('data-target'))
+
+                let data = element.getAttribute('data-kk')
+                if (data != null) {
+                    data = data.split('-')
+
+                    let input = document.querySelectorAll('#input')
+                    console.log(input.length)
+
+                    for (let i = 0; i < input.length; i++) {
+                        input[i].value = data[i]
+                    }
+                }
 
                 target.classList.add('is-active')
 
