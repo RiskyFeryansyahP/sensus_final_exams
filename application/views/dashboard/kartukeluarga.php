@@ -90,6 +90,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>No KK</th>
+                                    <th>Nama</th>
                                     <th>Status Dalam Keluarga</th>
                                     <th>Nama Ayah</th>
                                     <th>Nama Ibu</th>
@@ -104,6 +105,7 @@
                                     <tr>
                                         <td> <?= $i ?> </td>
                                         <td> <?= $kk['no_kk']; ?> </td>
+                                        <td> <?= $kk['nama']; ?> </td>
                                         <td> <?= $kk['status_dalam_keluarga']; ?> </td>
                                         <td> <?= $kk['ayah']; ?> </td>
                                         <td> <?= $kk['ibu']; ?> </td>

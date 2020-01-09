@@ -89,7 +89,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>NIK</th>
+                                    <th>Nama</th>
                                     <th>Tanggal Kematian</th>
                                     <th>Penyebab</th>
                                     <th>Actions</th>
@@ -102,7 +102,7 @@
                                 ?>
                                     <tr>
                                         <td> <?= $i ?> </td>
-                                        <td> <?= $kematian['nik']; ?> </td>
+                                        <td> <?= $kematian['nama']; ?> </td>
                                         <td> <?= $kematian['tgl_kematian']; ?> </td>
                                         <td> <?= $kematian['penyebab']; ?> </td>
                                         <td>
