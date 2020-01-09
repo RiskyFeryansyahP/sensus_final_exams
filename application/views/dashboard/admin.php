@@ -68,7 +68,7 @@
                         <ul class="menu-list">
                             <li><a href="http://localhost:8888/sensus/index.php/penduduk">Data Penduduk</a></li>
                             <li><a href="http://localhost:8888/sensus/index.php/kartukeluarga">Data Kartu Keluarga</a></li>
-                            <li><a>Data Pendatang</a></li>
+                            <li><a href="http://localhost:8888/sensus/index.php/pendatang">Data Pendatang</a></li>
                             <li><a>Data Kematian</a></li>
                         </ul>
                     </aside>
