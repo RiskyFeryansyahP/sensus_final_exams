@@ -8,7 +8,10 @@ class KKModel extends CI_Model
     }
 
     public function getAllKK() {
-        $query = $this->db->get('kartukeluarga');
+        $this->db->select('*');
+        $this->db->from('kartukeluarga');
+        $this->db->join('penduduk', 'penduduk.nik = kartukeluarga.nik');
+        $query = $this->db->get();
         return $query->result_array();
     }
 

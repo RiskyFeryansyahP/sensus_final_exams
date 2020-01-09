@@ -8,7 +8,10 @@ class KematianModel extends CI_Model
     }
 
     public function getAllKematian() {
-        $query = $this->db->get('kematian');
+        $this->db->select('*');
+        $this->db->from('kematian');
+        $this->db->join('penduduk', 'kematian.nik = penduduk.nik');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
