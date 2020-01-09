@@ -80,7 +80,7 @@
             <div class="p-1">
                 <div class="columns is-variable is-dekstop">
                     <div class="column">
-                        <h1 class="title">Penduduk</h1>
+                        <h1 class="title">Anggota Keluarga</h1>
                     </div>
                 </div>
                 <div class="columns is-variable is-dekstop">
@@ -127,7 +127,7 @@
                                 ?>
                             </tbody>
                         </table>
-                        <a class="button is-info is-focused modal-button" data-target="#modalAdd">Tambah Data Penduduk</a>
+                        <a class="button is-info is-focused modal-button" data-target="#modalAdd">Tambah Anggota Keluarga</a>
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
     <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">Modal title</p>
+                <p class="modal-card-title">Tambah Anggota Keluarga</p>
                 <button class="delete button-close" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
@@ -200,7 +200,7 @@
     <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">Modal title</p>
+                <p class="modal-card-title">Edit Anggota Keluarga</p>
                 <button class="delete button-close" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
