@@ -8,7 +8,10 @@ class PendatangModel extends CI_Model
     }
 
     public function getAllPendatang() {
-        $query = $this->db->get('pendatang');
+        $this->db->select('*');
+        $this->db->from('pendatang');
+        $this->db->join('penduduk', 'pendatang.nik = penduduk.nik');
+        $query = $this->db->get();
         return $query->result_array();
     }
 

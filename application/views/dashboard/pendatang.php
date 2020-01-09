@@ -89,7 +89,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>NIK</th>
+                                    <th>Nama</th>
                                     <th>Tanggal Datang</th>
                                     <th>Alamat Asal</th>
                                     <th>Alamat Sekarang</th>
@@ -103,7 +103,7 @@
                                 ?>
                                     <tr>
                                         <td> <?= $i ?> </td>
-                                        <td> <?= $pendatang['nik']; ?> </td>
+                                        <td> <?= $pendatang['nama']; ?> </td>
                                         <td> <?= $pendatang['tgl_datang']; ?> </td>
                                         <td> <?= $pendatang['alamat_asal']; ?> </td>
                                         <td> <?= $pendatang['alamat_sekarang']; ?> </td>
